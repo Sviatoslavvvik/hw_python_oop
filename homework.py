@@ -101,8 +101,8 @@ class SportsWalking(Training):
     def get_spent_calories(self) -> float:
         spent_calories: float = ((self.COEFF_CALORIE_1 * self.weight
                                  + ((super().get_mean_speed()
-                                 ** self.COEFF_CALORIE_2)
-                                 // self.height)
+                                     ** self.COEFF_CALORIE_2)
+                                    // self.height)
                                  * self.COEFF_CALORIE_3 * self.weight)
                                  * self.duration * self.COEFF_CALORIE_4)
         return spent_calories
@@ -122,7 +122,7 @@ class Swimming(Training):
                  length_pool: float,
                  count_pool: float
                  ) -> None:
-        super().__init__(action, 
+        super().__init__(action,
                          duration,
                          weight)
         self.length_pool = length_pool  # in metres
@@ -145,10 +145,10 @@ def read_package(workout_type: str, data: list) -> Training:
     workout_types: Dict[str: Union[Swimming,
                                    Running,
                                    SportsWalking]
-                        ] =       {'SWM': Swimming,
-                                  'RUN': Running,
-                                  'WLK': SportsWalking
-                                  }
+                        ] = {'SWM': Swimming,
+                            'RUN': Running,
+                            'WLK': SportsWalking
+                            }
 
     return (workout_types[workout_type](*data))
 
