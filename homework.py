@@ -1,5 +1,4 @@
-from typing import Dict
-from typing import Union
+from typing import Dict, Union
 
 
 class InfoMessage:
@@ -21,7 +20,7 @@ class InfoMessage:
     def get_message(self) -> str:
         """Вернуть строку сообщения"""
         return (f'Тип тренировки: {self.training_type};'
-                f' Длительность: {round(self.duration,3):.3f} ч.;'
+                f' Длительность: {self.duration:.3f} ч.;'
                 f' Дистанция: {round(self.distance,3):.3f} км;'
                 f' Ср. скорость: {round (self.speed,3):.3f} км/ч;'
                 f' Потрачено ккал: {round(self.calories,3):.3f}.'
