@@ -52,7 +52,8 @@ class Training:
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
         raise NotImplementedError(
-                f'Определите run в {self.__class__.__name__}')
+                                  f'Определите run ' 
+                                  f'в {self.__class__.__name__}')
 
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
@@ -70,7 +71,7 @@ class Running(Training):
     """Тренировка: бег."""
     CALORIES_SPEED_MULTIPLIER: float = field(repr=False,
                                              init=False,
-                                             default=18) 
+                                             default=18)
     CALORIES_SPEED_DEDUCT: float = field(repr=False,
                                          init=False,
                                          default=20)
@@ -100,12 +101,12 @@ class SportsWalking(Training):
     height: float = field()  # user's height in m
 
     def get_spent_calories(self) -> float:
-        spent_calories: float = ((self.CALORIES_WHEIGHT_MULTIPLYER 
+        spent_calories: float = ((self.CALORIES_WHEIGHT_MULTIPLYER
                                  * self.weight
                                  + ((self.get_mean_speed()
-                                 ** self.MEAN_SPEED_POWER)
-                                 // self.height)
-                                 * self.SECOND_WHEIGHT_MULTIPLYER 
+                                     ** self.MEAN_SPEED_POWER)
+                                     // self.height)
+                                 * self.SECOND_WHEIGHT_MULTIPLYER
                                  * self.weight)
                                  * self.duration * self.MINUTES_IN_HOUR)
         return spent_calories
@@ -135,17 +136,17 @@ class Swimming(Training):
         return mean_speed
 
     def get_spent_calories(self) -> float:
-        spent_calories: float = ((self.get_mean_speed() 
+        spent_calories: float = ((self.get_mean_speed()
                                   + self.CALORIE_SPEED_SUMMAND)
-                                  * self.CALORIES_SPEED_MULTIPL * self.weight)
+                                 * self.CALORIES_SPEED_MULTIPL * self.weight)
         return spent_calories
 
 
 def read_package(workout_type: str, data: List[float]) -> Training:
     """Прочитать данные полученные от датчиков."""
     workout_types: Dict[str: Training] = {'SWM': Swimming,
-                                         'RUN': Running,
-                                         'WLK': SportsWalking
+                                          'RUN': Running,
+                                          'WLK': SportsWalking
                                           }
 
     return (workout_types.get(workout_type)(*data))
