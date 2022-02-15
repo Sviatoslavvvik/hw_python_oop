@@ -1,22 +1,16 @@
 from typing import Dict, List
+from dataclasses import dataclass, field
 
-
+@dataclass
 class InfoMessage:
     """Информационное сообщение о тренировке."""
-    def __init__(self,
-                 training_type: str,
-                 duration: float,
-                 distance: float,
-                 speed: float,
-                 calories: float
-                 ) -> None:
 
-        self.training_type = training_type
-        self.duration = duration
-        self.distance = distance
-        self.speed = speed
-        self.calories = calories
-
+    training_type: str
+    duration: float
+    distance: float
+    speed: float
+    calories: float
+    
     def get_message(self) -> str:
         """Вернуть строку сообщения"""
         return (f'Тип тренировки: {self.training_type};'
@@ -27,20 +21,17 @@ class InfoMessage:
                 )
 
 
+@dataclass
 class Training:
     """Базовый класс тренировки."""
-    LEN_STEP: float = 0.65  # length of one step
-    M_IN_KM: int = 1000     # constant to recalculate of meanf from m to km
-    MINUTES_IN_HOUR: float = 60  # constant to tecalculate hours in minutes
+    LEN_STEP: float = field (repr = False, init = False, default = 0.65)  # length of one step
+    M_IN_KM: int = field (repr = False, init = False, default = 1000)  # constant to recalculate of meanf from m to km
+    MINUTES_IN_HOUR: float = field (repr = False, init = False, default = 60)  # constant to tecalculate hours in minutes
 
-    def __init__(self,
-                 action: int,
-                 duration: float,
-                 weight: float
-                 ) -> None:
-        self.action = action
-        self.duration = duration
-        self.weight = weight
+    action: int = field()
+    duration: float = field ()
+    weight: float = field ()
+
 
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
@@ -68,10 +59,11 @@ class Training:
                            )
 
 
+@dataclass
 class Running(Training):
     """Тренировка: бег."""
-    CALORIES_SPEED_MULTIPLIER: float = 18  # first coeffcicient in spent_calories formula
-    CALORIES_SPEED_DEDUCT: float = 20  # second coefficient in spent_calories formula
+    CALORIES_SPEED_MULTIPLIER: float = field (repr = False, init = False, default = 18)  # first coeffcicient in spent_calories formula
+    CALORIES_SPEED_DEDUCT: float = field (repr = False, init = False, default = 20)  # second coefficient in spent_calories formula
     
 
     def get_spent_calories(self) -> float:
@@ -83,20 +75,14 @@ class Running(Training):
         return spent_calories
 
 
+@dataclass
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
-    CALORIES_WHEIGHT_MULTIPLYER: float = 0.035  # first coeffcicient in spent_calories eq.
-    MEAN_SPEED_POWER: int = 2  # second coefficient in spent_calories eq.
-    SECOND_WHEIGHT_MULTIPLYER: float = 0.029  # third coefficient in spent_calories eq.
+    CALORIES_WHEIGHT_MULTIPLYER: float = field (repr = False, init = False, default = 0.035)  # first coeffcicient in spent_calories eq.
+    MEAN_SPEED_POWER: int = field (repr = False, init = False, default = 2)  # second coefficient in spent_calories eq.
+    SECOND_WHEIGHT_MULTIPLYER: float = field (repr = False, init = False, default = 0.029)  # third coefficient in spent_calories eq.
 
-    def __init__(self,
-                 action: int,
-                 duration: float,
-                 weight: float,
-                 height: float
-                 ) -> None:
-        super().__init__(action, duration, weight)
-        self.height = height  # user height in m
+    height: float = field()  #user's height in m
 
     def get_spent_calories(self) -> float:
         spent_calories: float = ((self.CALORIES_WHEIGHT_MULTIPLYER * self.weight
@@ -108,25 +94,16 @@ class SportsWalking(Training):
         return spent_calories
 
 
+@dataclass
 class Swimming(Training):
     """Тренировка: плавание."""
 
-    LEN_STEP: float = 1.38
-    CALORIE_SPEED_SUMMAND: float = 1.1  # first coeff. in spent_calories equat.
-    CALORIES_SPEED_MULTIPL: float = 2  # second coeff. in spent_calories equat.
-
-    def __init__(self,
-                 action: int,
-                 duration: float,
-                 weight: float,
-                 length_pool: float,
-                 count_pool: float
-                 ) -> None:
-        super().__init__(action,
-                         duration,
-                         weight)
-        self.length_pool = length_pool  # in metres
-        self.count_pool = count_pool  # swiming pools amount by user
+    LEN_STEP: float = field (repr = False, init = False, default = 1.38)
+    CALORIE_SPEED_SUMMAND: float = field (repr = False, init = False, default = 1.1)  # first coeff. in spent_calories equat.
+    CALORIES_SPEED_MULTIPL: float = field (repr = False, init = False, default = 2)  # second coeff. in spent_calories equat.
+    
+    length_pool: float = field()
+    count_pool: float = field()
 
     def get_mean_speed(self) -> float:
         """Получить среднюю скорость движения."""
