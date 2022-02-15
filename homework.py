@@ -24,9 +24,15 @@ class InfoMessage:
 @dataclass
 class Training:
     """Базовый класс тренировки."""
-    LEN_STEP: float = field (repr = False, init = False, default = 0.65)  # length of one step
-    M_IN_KM: int = field (repr = False, init = False, default = 1000)  # constant to recalculate of meanf from m to km
-    MINUTES_IN_HOUR: float = field (repr = False, init = False, default = 60)  # constant to tecalculate hours in minutes
+    LEN_STEP: float = field (repr = False, 
+                             init = False, 
+                             default = 0.65)  # length of one step
+    M_IN_KM: int = field (repr = False,
+                          init = False,
+                          default = 1000)  # m in km
+    MINUTES_IN_HOUR: float = field (repr = False,
+                                     init = False,
+                                     default = 60)
 
     action: int = field()
     duration: float = field ()
@@ -62,8 +68,14 @@ class Training:
 @dataclass
 class Running(Training):
     """Тренировка: бег."""
-    CALORIES_SPEED_MULTIPLIER: float = field (repr = False, init = False, default = 18)  # first coeffcicient in spent_calories formula
-    CALORIES_SPEED_DEDUCT: float = field (repr = False, init = False, default = 20)  # second coefficient in spent_calories formula
+    CALORIES_SPEED_MULTIPLIER: float = field (repr = False,
+                                              init = False,
+                                              default = 18)  # first coeffcicient 
+                                                              #in spent_calories formula
+    CALORIES_SPEED_DEDUCT: float = field (repr = False,
+                                          init = False,
+                                          default = 20)  # second coefficient in 
+                                                         #spent_calories formula
     
 
     def get_spent_calories(self) -> float:
@@ -78,9 +90,17 @@ class Running(Training):
 @dataclass
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
-    CALORIES_WHEIGHT_MULTIPLYER: float = field (repr = False, init = False, default = 0.035)  # first coeffcicient in spent_calories eq.
-    MEAN_SPEED_POWER: int = field (repr = False, init = False, default = 2)  # second coefficient in spent_calories eq.
-    SECOND_WHEIGHT_MULTIPLYER: float = field (repr = False, init = False, default = 0.029)  # third coefficient in spent_calories eq.
+    CALORIES_WHEIGHT_MULTIPLYER: float = field (repr = False,
+                                                init = False,
+                                                default = 0.035)  # first coeffcicient 
+                                                                   #in spent_calories eq.
+    MEAN_SPEED_POWER: int = field (repr = False,
+                                   init = False,
+                                   default = 2)  # second coefficient in spent_calories eq.
+    SECOND_WHEIGHT_MULTIPLYER: float = field (repr = False,
+                                              init = False,
+                                              default = 0.029)  # third coefficient 
+                                                                #in spent_calories eq.
 
     height: float = field()  #user's height in m
 
@@ -98,9 +118,15 @@ class SportsWalking(Training):
 class Swimming(Training):
     """Тренировка: плавание."""
 
-    LEN_STEP: float = field (repr = False, init = False, default = 1.38)
-    CALORIE_SPEED_SUMMAND: float = field (repr = False, init = False, default = 1.1)  # first coeff. in spent_calories equat.
-    CALORIES_SPEED_MULTIPL: float = field (repr = False, init = False, default = 2)  # second coeff. in spent_calories equat.
+    LEN_STEP: float = field (repr = False,
+                             init = False,
+                             default = 1.38)
+    CALORIE_SPEED_SUMMAND: float = field (repr = False,
+                                          init = False,
+                                          default = 1.1)  # first coeff. in spent_calories equat.
+    CALORIES_SPEED_MULTIPL: float = field (repr = False,
+                                           init = False,
+                                           default = 2)  # second coeff. in spent_calories equat.
     
     length_pool: float = field()
     count_pool: float = field()
