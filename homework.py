@@ -70,10 +70,10 @@ class Running(Training):
     """Тренировка: бег."""
     CALORIES_SPEED_MULTIPLIER: float = field(repr=False,
                                              init=False,
-                                             default=18)  
-    CALORIES_SPEED_DEDUCT: float = field(repr = False,
-                                         init = False,
-                                         default = 20) 
+                                             default=18) 
+    CALORIES_SPEED_DEDUCT: float = field(repr=False,
+                                         init=False,
+                                         default=20)
 
     def get_spent_calories(self) -> float:
         spent_calories: float = ((self.CALORIES_SPEED_MULTIPLIER
@@ -93,18 +93,20 @@ class SportsWalking(Training):
     MEAN_SPEED_POWER: int = field(repr=False,
                                   init=False,
                                   default=2)
-    SECOND_WHEIGHT_MULTIPLYER: float = field (repr=False,
-                                              init=False,
-                                              default=0.029)
+    SECOND_WHEIGHT_MULTIPLYER: float = field(repr=False,
+                                             init=False,
+                                             default=0.029)
 
-    height: float = field()  #user's height in m
+    height: float = field()  # user's height in m
 
     def get_spent_calories(self) -> float:
-        spent_calories: float = ((self.CALORIES_WHEIGHT_MULTIPLYER * self.weight
+        spent_calories: float = ((self.CALORIES_WHEIGHT_MULTIPLYER 
+                                 * self.weight
                                  + ((self.get_mean_speed()
-                                     ** self.MEAN_SPEED_POWER)
-                                    // self.height)
-                                 * self.SECOND_WHEIGHT_MULTIPLYER * self.weight)
+                                 ** self.MEAN_SPEED_POWER)
+                                 // self.height)
+                                 * self.SECOND_WHEIGHT_MULTIPLYER 
+                                 * self.weight)
                                  * self.duration * self.MINUTES_IN_HOUR)
         return spent_calories
 
@@ -133,8 +135,9 @@ class Swimming(Training):
         return mean_speed
 
     def get_spent_calories(self) -> float:
-        spent_calories: float = ((self.get_mean_speed() + self.CALORIE_SPEED_SUMMAND)
-                                 * self.CALORIES_SPEED_MULTIPL * self.weight)
+        spent_calories: float = ((self.get_mean_speed() 
+                                  + self.CALORIE_SPEED_SUMMAND)
+                                  * self.CALORIES_SPEED_MULTIPL * self.weight)
         return spent_calories
 
 
