@@ -5,7 +5,7 @@ from dataclasses import dataclass
 @dataclass(init=True,
            repr=False,
            eq=False
-            )
+           )
 class InfoMessage:
     """Информационное сообщение о тренировке."""
 
