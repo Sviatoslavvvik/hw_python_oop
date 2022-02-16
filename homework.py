@@ -2,11 +2,11 @@ from typing import Dict, List, ClassVar, Optional
 from dataclasses import dataclass
 
 
-@dataclass (init=True, 
-            repr=False,
-            eq=False,
-            match_args=False
-            )
+@dataclass(init=True,
+           repr=False,
+           eq=False,
+           match_args=False
+           )
 class InfoMessage:
     """Информационное сообщение о тренировке."""
 
@@ -27,11 +27,11 @@ class InfoMessage:
         return info_message
 
 
-@dataclass (init=True,
-            repr=False,
-            eq=False,
-            match_args=False
-            )
+@dataclass(init=True,
+           repr=False,
+           eq=False,
+           match_args=False
+           )
 class Training:
     """Базовый класс тренировки."""
     LEN_STEP: ClassVar[float] = 0.65  # length of one step
