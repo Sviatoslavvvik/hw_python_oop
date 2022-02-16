@@ -4,9 +4,8 @@ from dataclasses import dataclass
 
 @dataclass(init=True,
            repr=False,
-           eq=False,
-           match_args=False
-           )
+           eq=False
+            )
 class InfoMessage:
     """Информационное сообщение о тренировке."""
 
@@ -29,8 +28,7 @@ class InfoMessage:
 
 @dataclass(init=True,
            repr=False,
-           eq=False,
-           match_args=False
+           eq=False
            )
 class Training:
     """Базовый класс тренировки."""
@@ -70,8 +68,7 @@ class Training:
 
 @dataclass(init=False,
            repr=False,
-           eq=False,
-           match_args=False
+           eq=False
            )
 class Running(Training):
     """Тренировка: бег."""
@@ -89,8 +86,7 @@ class Running(Training):
 
 @dataclass(init=True,
            repr=False,
-           eq=False,
-           match_args=False
+           eq=False
            )
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
@@ -114,8 +110,7 @@ class SportsWalking(Training):
 
 @dataclass(init=True,
            repr=False,
-           eq=False,
-           match_args=False
+           eq=False
            )
 class Swimming(Training):
     """Тренировка: плавание."""
