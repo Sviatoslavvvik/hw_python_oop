@@ -1,8 +1,8 @@
-from typing import Dict, List, ClassVar, Optional
+from typing import Dict, List, ClassVar, Optional, Type
 from dataclasses import dataclass
 
 
-@dataclass(init=True,
+@dataclass(
            repr=False,
            eq=False
            )
@@ -26,7 +26,7 @@ class InfoMessage:
         return info_message
 
 
-@dataclass(init=True,
+@dataclass(
            repr=False,
            eq=False
            )
@@ -66,7 +66,7 @@ class Training:
                            )
 
 
-@dataclass(init=False,
+@dataclass(
            repr=False,
            eq=False
            )
@@ -84,7 +84,7 @@ class Running(Training):
         return spent_calories
 
 
-@dataclass(init=True,
+@dataclass(
            repr=False,
            eq=False
            )
@@ -108,7 +108,7 @@ class SportsWalking(Training):
         return spent_calories
 
 
-@dataclass(init=True,
+@dataclass(
            repr=False,
            eq=False
            )
@@ -135,12 +135,12 @@ class Swimming(Training):
         return spent_calories
 
 
-def read_package(workout_type: str, data: List[float]) -> Optional[Training]:
+def read_package(workout_type: str, data: List[int]) -> Optional[Training]:
     """Прочитать данные полученные от датчиков."""
-    workout_types: Dict[str: Training] = {'SWM': Swimming,
-                                          'RUN': Running,
-                                          'WLK': SportsWalking
-                                          }
+    workout_types: Dict[str, Type[Training]] = {'SWM': Swimming,
+                                                'RUN': Running,
+                                                'WLK': SportsWalking
+                                                }
 
     return (workout_types.get(workout_type)(*data))
 
